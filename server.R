@@ -51,12 +51,7 @@ shinyServer(function(input, output) {
     output$new_aid_total <- reactive({
         dollar(sum(react_data()$new_aid, na.rm = TRUE))
     })
-    
-    # output$table1 <- DT::renderDataTable(DT::datatable({
-    #     data <- sparsity_data
-    #     data
-    # }))
-    
+
     tableData <- reactive({
         react_data() %>%
             filter(ADM_persqmile <= input$enroll_psm)
@@ -115,20 +110,6 @@ shinyServer(function(input, output) {
             ) %>%
         formatCurrency(roundVARS(), currency = "", mark = ',', digits = 0)
     })
-    # rownames = FALSE,
-    # options = list(paging = FALSE, scrollY = "700px", scrollX = TRUE, scrollCollapse = TRUE)) %>%
-    # formatPercentage(percentVARs(), digits = 0) %>% # format percents
-    # formatCurrency(currencyVARs(), digits = 0, currency = "$", mark = ",") %>% #format dollars
-    # formatCurrency(roundVARS(), currency = "", digits = 0) %>% #format numbers
-    # formatStyle(names(tableData()), color = JS("value < 0 ? 'red' : 'black'")))
-    # output$table2 <- DT::renderDataTable(
-    #     prettyData() %>%
-    #         select(on_of(c("")))
-    # )
-    #     DT::datatable({
-    #     data <- tableData
-    #     data
-    # }))
     
     output$budget <- reactive({
         dollar(sum(sparsity_data$sr_BEP, na.rm = TRUE))
@@ -138,38 +119,4 @@ shinyServer(function(input, output) {
         dollar(sum(sparsity_data$sr_BEP) - sum(sparsity_data$sr, na.rm = TRUE))
         # dollar(sum(react_data()$weighted_sr)-sum(react_data()$sr_BEP, na.rm = TRUE))
     })
-    # prettyTableData <- reactive({
-    #     prettyData() %>%
-    #         select(all_of(c("District")))
-    # })
-    
-    ## DATA TABLE
-    # defining the table data as a subset of prettyDat
-    # tableData <- reactive({
-    #     prettyData() %>%
-    #         select(one_of(c("District", input$tableCols)))
-    # })
-    #
-    # # rendering the table output
-    # output$tbl <- DT::renderDataTable({
-    #
-    #     datatable(tableData(), rownames = FALSE,
-    #               options = list(paging = FALSE, scrollY = "700px", scrollX = TRUE, scrollCollapse = TRUE)) %>%
-    #         formatPercentage(percentVARs(), digits = 0) %>% # format percents
-    #         formatCurrency(currencyVARs(), digits = 0, currency = "$", mark = ",") %>% #format dollars
-    #         formatCurrency(roundVARS(), currency = "", digits = 0) %>% #format numbers
-    #         formatStyle(names(tableData()), color = JS("value < 0 ? 'red' : 'black'"))
-    #
-    # })
-    
-    # output$table1 <- DT::renderDataTable(
-    #     data <- tableData()
-    #     # , rownames = FALSE,
-    #     #           options = list(paging = FALSE, scrollY = "700px", scrollX = TRUE, scrollCollapse = TRUE)) %>%
-    #     #     formatPercentage(percentVARs(), digits = 0) %>% # format percents
-    #     #     formatCurrency(currencyVARs(), digits = 0, currency = "$", mark = ",") %>% #format dollars
-    #     #     formatCurrency(roundVARS(), currency = "", digits = 0) %>% #format numbers
-    #     #     formatStyle(names(tableData()), color = JS("value < 0 ? 'red' : 'black'"))
-    # )
-    
 })
